@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search MVP: Scrum Sprint Roadmap Matrix</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body class="rpg-theme">
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <span class="pulse-dot"></span>
+        <h1 class="orbitron">
+          SEARCH MVP ROADMAP <span class="header-subtitle">:: Optimizing Search Journeys</span>
+        </h1>
+      </div>
+      <div class="system-status">
+        <span id="sprint-timer" class="orbitron text-xs">SP8: 2026.07.06 ~ 2026.07.17</span>
+        <span id="completion-rate">0% SQUAD PROGRESS</span>
+      </div>
+    </header>
+
+    <!-- Horizontal Sprint Timeline Navigation -->
+    <nav class="sprint-timeline border-glow">
+      <div class="timeline-nodes">
+        <button class="sprint-tab active" data-sprint="SP8">
+          <span class="sprint-id orbitron">SP8</span>
+          <span class="sprint-title text-xs">기본 흐름 구축</span>
+        </button>
+        <div class="timeline-line"></div>
+        <button class="sprint-tab" data-sprint="SP9">
+          <span class="sprint-id orbitron">SP9</span>
+          <span class="sprint-title text-xs">핵심 기능 확장</span>
+        </button>
+        <div class="timeline-line"></div>
+        <button class="sprint-tab" data-sprint="SP10">
+          <span class="sprint-id orbitron">SP10</span>
+          <span class="sprint-title text-xs">검색 경험 고도화</span>
+        </button>
+        <div class="timeline-line"></div>
+        <button class="sprint-tab" data-sprint="SP11">
+          <span class="sprint-id orbitron">SP11</span>
+          <span class="sprint-title text-xs">확장 화면 개발</span>
+        </button>
+        <div class="timeline-line"></div>
+        <button class="sprint-tab" data-sprint="SP12">
+          <span class="sprint-id orbitron">SP12</span>
+          <span class="sprint-title text-xs">오픈 준비 완료</span>
+        </button>
+        <div class="timeline-line"></div>
+        <button class="sprint-tab" data-sprint="SP13">
+          <span class="sprint-id orbitron">SP13</span>
+          <span class="sprint-title text-xs">품질검증/심의</span>
+        </button>
+        <div class="timeline-line"></div>
+        <button class="sprint-tab" data-sprint="SP14">
+          <span class="sprint-id orbitron">SP14</span>
+          <span class="sprint-title text-xs">실험 설계/UT</span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="main-layout">
+      <!-- Sidebar / Character Card -->
+      <aside class="sidebar character-panel">
+        <div class="panel-header border-glow">
+          <h2 class="orbitron">SQUAD PROFILE</h2>
+        </div>
+        <div class="character-info">
+          <div class="avatar-container">
+            <div class="avatar-frame">
+              <div class="avatar-face">🚀</div>
+            </div>
+            <div class="level-badge orbitron" id="char-level">LV.8</div>
+          </div>
+          <div class="char-meta">
+            <div class="char-name font-bold">DANAWA SQUAD</div>
+            <div class="char-class text-muted text-xs">Navigation 2.0</div>
+          </div>
+        </div>
+
+        <div class="xp-section">
+          <div class="xp-labels text-xs">
+            <span>SQUAD VELOCITY</span>
+            <span id="xp-text" class="orbitron">SP8 ACTIVE</span>
+          </div>
+          <div class="xp-bar-container">
+            <div class="xp-bar" id="xp-progress" style="width: 25%"></div>
+          </div>
+        </div>
+
+        <div class="stats-section">
+          <h3 class="section-title text-xs orbitron">SQUAD CAPABILITY</h3>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-icon">🎨</span>
+              <div class="stat-details">
+                <span class="stat-label text-xs">UX Strategy & Design</span>
+                <div class="stat-value-container">
+                  <span class="stat-value orbitron">1.5</span>
+                </div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">📊</span>
+              <div class="stat-details">
+                <span class="stat-label text-xs">Data Intelligence</span>
+                <div class="stat-value-container">
+                  <span class="stat-value orbitron">1.5</span>
+                </div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">⚙️</span>
+              <div class="stat-details">
+                <span class="stat-label text-xs">Backend Engineering</span>
+                <div class="stat-value-container">
+                  <span class="stat-value orbitron">2</span>
+                </div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">🖥️</span>
+              <div class="stat-details">
+                <span class="stat-label text-xs">Frontend Engineering</span>
+                <div class="stat-value-container">
+                  <span class="stat-value orbitron">1</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Board / Map -->
+      <main class="content-area">
+        <div class="split-layout">
+          <!-- Left side: Scenario Map -->
+          <div class="quest-path-container">
+            <div class="svg-connections-container">
+              <svg id="path-svg" width="100%" height="100%"></svg>
+            </div>
+            <div class="quest-nodes-grid" id="quest-nodes-container">
+              <!-- Dynamic Quests generated in app.js -->
+            </div>
+          </div>
+
+          <!-- Right side: Active Sprint Context Card (Vertical) -->
+          <div class="sprint-context-card vertical glass">
+            <div class="sprint-context-header">
+              <div class="sprint-header-top">
+                <span class="badge-sprint orbitron" id="display-sprint-id">SP8</span>
+                <h3 id="display-sprint-concept">기본 검색 흐름 구축</h3>
+              </div>
+              <span class="badge-date text-xs text-muted" id="display-sprint-date">2026.07.06 ~ 2026.07.17</span>
+            </div>
+            <div class="sprint-context-body">
+              <div class="context-item">
+                <div class="text-xs orbitron text-cyan">CUSTOMER EXPERIENCE VALUE (고객 체감 가치)</div>
+                <p id="display-sprint-value" class="text-sm font-bold">고객이 검색창에 진입해 자동완성 후보를 확인하고, 일부 종목/메뉴 결과까지 이동할 수 있다.</p>
+              </div>
+              <div class="context-item">
+                <div class="text-xs orbitron text-green">REVIEW MESSAGE (리뷰 설명 요약)</div>
+                <p id="display-sprint-review" class="text-xs text-muted">고객이 검색창에 진입해 자동완성으로 목적지 후보를 발견하고, 일부 종목/메뉴 결과까지 연결되는 기본 흐름을 만든다.</p>
+              </div>
+            </div>
+            <div class="sprint-context-footer">
+              <button id="sprint-review-play-btn" class="btn btn-primary text-xs orbitron" style="width: 100%;">PLAY SPRINT REVIEW STORYBOARD 🎬</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Quest Details Modal -->
+  <div class="modal-overlay" id="quest-modal">
+    <div class="modal-content glass">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      
+      <div class="modal-header">
+        <div class="quest-badge orbitron" id="modal-quest-badge">QUEST 01</div>
+        <h2 id="modal-quest-title">시나리오 제목</h2>
+        <div class="quest-type-label text-xs text-muted" id="modal-quest-zone">ZONE 1: SEARCH ENTRY</div>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-section bg-dark-glass">
+          <h3 class="text-xs orbitron section-title-accent">CUSTOMER CONTEXT & PERSONA SIMULATION (페르소나 시나리오)</h3>
+          <p id="modal-quest-context" class="text-sm text-muted" style="margin-bottom: 12px;"></p>
+          
+          <div class="persona-sim-container">
+            <div class="persona-profile-card">
+              <div class="persona-avatar-icon" id="persona-avatar">🙋‍♂️</div>
+              <div class="persona-meta-info">
+                <div class="persona-name font-bold" id="persona-name">유저 페르소나</div>
+                <div class="persona-desc text-xs text-muted" id="persona-desc">투자 유형</div>
+              </div>
+            </div>
+            
+            <div class="simulation-screen">
+              <div class="sim-chat-area" id="sim-chat-area">
+                <!-- Dynamic animation chat bubbles -->
+              </div>
+            </div>
+            
+            <div class="sim-controls">
+              <button id="play-sim-btn" class="btn btn-primary text-xs orbitron">PLAY STORYBOARD 🎬</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-grid">
+          <div class="modal-section">
+            <h3 class="text-xs orbitron section-title-accent">GOAL EXPERIENCE (목표 경험)</h3>
+            <ul id="modal-quest-goals" class="bullet-list text-sm">
+              <!-- JS Dynamic list -->
+            </ul>
+          </div>
+
+          <div class="modal-section">
+            <h3 class="text-xs orbitron section-title-accent">SPRINT STATUS & WORKLOAD (스프린트별 매핑 상태)</h3>
+            <div class="sprint-status-box" id="modal-sprint-status-box">
+              <!-- JS Dynamic sprint metrics -->
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <h3 class="text-xs orbitron section-title-accent">COMPLETION CRITERIA (완료 기준)</h3>
+          <ul id="modal-quest-conditions" class="conditions-list">
+            <!-- JS Dynamic conditions -->
+          </ul>
+        </div>
+
+        <div class="modal-rewards-section border-glow">
+          <h3 class="text-xs orbitron text-center">QUEST REWARDS</h3>
+          <div class="rewards-display">
+            <div class="reward-item">
+              <span class="reward-icon">💎</span>
+              <span class="reward-value orbitron" id="modal-reward-xp">+50 EXP</span>
+            </div>
+            <div class="reward-item">
+              <span class="reward-icon">⚡</span>
+              <span class="reward-value orbitron" id="modal-reward-stat">+8 UI/UX</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Sprint Review Storyboard Overlay Modal -->
+  <div class="modal-overlay" id="review-modal">
+    <div class="modal-content glass" style="max-width: 600px;">
+      <button class="modal-close" id="review-modal-close-btn">&times;</button>
+      <div class="modal-header text-center">
+        <div class="quest-badge orbitron" id="review-modal-badge">SP8 SPRINT REVIEW</div>
+        <h2 id="review-modal-title" class="orbitron">CUSTOMER SCENARIO STORY</h2>
+        <p class="text-xs text-muted" id="review-modal-subtitle">이 스프린트에서 고객이 새로 할 수 있게 된 가치 흐름 시뮬레이션</p>
+      </div>
+      <div class="modal-body">
+        <div class="simulation-screen" style="height: 320px;">
+          <div class="sim-chat-area" id="review-sim-chat-area">
+            <!-- Storyboard elements will render here -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer text-center">
+        <button id="review-modal-action-btn" class="btn btn-secondary text-sm orbitron">CLOSE REVIEW</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js?v=4"></script>
+</body>
+</html>
