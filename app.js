@@ -994,17 +994,25 @@ function renderQuestBoard() {
   });
 }
 
+// Pending drawConnections timeout. The SVG is cleared synchronously but the
+// paths are appended 100ms later, so a redraw that lands inside that window
+// (rapid sprint-tab clicks) would otherwise let the previous sprint's paths
+// arrive after the clear and accumulate on top of the new ones.
+let connectionTimeoutId = null;
+
 // Draw Connection Lines between active nodes
 function drawConnections() {
   const svg = document.getElementById("path-svg");
   svg.innerHTML = "";
-  
+
+  clearTimeout(connectionTimeoutId);
+
   const nodes = document.querySelectorAll(".quest-node");
   if (nodes.length < 2) return;
 
   const statusMap = sprintRoadmap[state.currentSprint].scenarioStatus;
 
-  setTimeout(() => {
+  connectionTimeoutId = setTimeout(() => {
     const svgRect = svg.getBoundingClientRect();
     
     for (let i = 0; i < quests.length - 1; i++) {

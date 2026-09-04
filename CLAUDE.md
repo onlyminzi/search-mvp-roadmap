@@ -17,7 +17,7 @@ open http://localhost:8000
 
 `.claude/launch.json` defines the same server as a `quest-dashboard` preview config, so it can also be started through Claude Code's preview tooling. Setup on a fresh machine is `git clone` + python3 — there is nothing else to install.
 
-Both asset links in [index.html](index.html) are cache-busted (`styles.css?v=4`, `app.js?v=4`). **Bump both `v=` values when you change CSS or JS**, or reloads may serve stale files.
+Both asset links in [index.html](index.html) are cache-busted (`styles.css?v=5`, `app.js?v=5`). **Bump both `v=` values when you change CSS or JS**, or reloads may serve stale files.
 
 ## Working rule: edit → verify → record
 
@@ -45,7 +45,7 @@ Two module-level data structures in [app.js](app.js) drive the entire UI; everyt
 `updateUI()` is the single entry point — it repaints the header/sprint card, then `renderQuestBoard()` → `drawConnections()`. It runs once at load and after every sprint-tab click and modal close. Mutable app state is the one `state` global: `currentSprint`, `selectedQuestId`. The sidebar's SQUAD CAPABILITY stats are static markup in [index.html](index.html), not driven by state.
 
 - `renderQuestBoard()` rebuilds `#quest-nodes-container` from scratch and attaches click handlers per node. Node position on the winding path comes from the `alignments` array, indexed by **array position, not quest id** — keep it the same length and order as `quests`.
-- `drawConnections()` measures nodes with `getBoundingClientRect()` inside a `setTimeout`, so it must run after the board is in the DOM. It links consecutive entries of `quests` in array order and colors the path by the two ranks.
+- `drawConnections()` measures nodes with `getBoundingClientRect()` inside a `setTimeout`, so it must run after the board is in the DOM. It links consecutive entries of `quests` in array order and colors the path by the two ranks. Because it clears `#path-svg` synchronously but appends 100ms later, it holds its pending timeout in the `connectionTimeoutId` module global and clears it on entry — otherwise a redraw inside that window (rapid sprint-tab clicks) lets the previous sprint's paths land after the clear and pile up.
 - Progress % and the XP bar use `totalRankPoints / (quests.length * 6)` — the denominator counts all 12 quests, including Expanded MVP ones that are locked in early sprints.
 
 ### Expanded MVP dual track

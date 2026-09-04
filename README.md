@@ -185,7 +185,7 @@ const sprintRoadmap = {
 | 함수명 | 역할 |
 |---|---|
 | `renderQuestBoard()` | 퀘스트 노드 렌더링. Q1~Q8 시안, E1~E4 보라 + 구분 배너 |
-| `drawConnections()` | SVG 점선으로 노드 간 경로 연결 |
+| `drawConnections()` | SVG 점선으로 노드 간 경로 연결. 100ms 지연 렌더라 `connectionTimeoutId`로 이전 호출을 취소해 경로 중복 누적을 막음 |
 | `openQuestModal(id)` | 퀘스트 클릭 → 모달 오픈 및 시나리오 데이터 렌더링 |
 | `playStoryboard()` | 모달 내 챗 버블 애니메이션 순차 재생 |
 | `playSprintReviewStoryboard()` | 스프린트 리뷰 스토리보드 재생 (confetti 포함) |
