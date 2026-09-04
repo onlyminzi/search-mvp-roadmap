@@ -22,7 +22,10 @@ antigravity/
 ├── styles.css         # 전체 CSS 디자인 시스템 (다크모드, RPG 테마)
 ├── app.js             # 모든 데이터 + 로직 (quests 배열, sprintRoadmap, 렌더링 함수)
 ├── cyber_cliff_bg.png # 배경 이미지
-└── README.md          # 이 문서
+├── README.md          # 이 문서
+├── CLAUDE.md          # Claude Code용 프로젝트 가이드
+└── .claude/
+    └── launch.json    # Claude Code 개발 서버 설정 (포트 8000)
 ```
 
 > ⚠️ **단일 페이지 앱(SPA)**: 프레임워크 없음. 순수 HTML + Vanilla JS + CSS.
@@ -40,16 +43,36 @@ antigravity/
 
 ## 4. 로컬 실행 방법
 
+### 4-1. 새 PC에서 처음 세팅할 때
+
+설치할 것은 **git과 python3뿐**입니다. Node.js, npm, 빌드 도구 모두 필요 없습니다.
+
 ```bash
-# 프로젝트 폴더로 이동 후
-cd /path/to/antigravity
-
-# 정적 파일 서버 실행
+git clone https://github.com/onlyminzi/search-mvp-roadmap.git
+cd search-mvp-roadmap
 python3 -m http.server 8000
-
-# 브라우저에서 접속
-open http://localhost:8000
 ```
+
+브라우저에서 http://localhost:8000 접속하면 끝입니다.
+
+> macOS·Linux는 python3가 기본 탑재되어 있습니다. Windows는 [python.org](https://www.python.org/downloads/)에서 설치하거나, 대신 `npx serve -l 8000` 을 써도 동일하게 동작합니다.
+
+### 4-2. 이미 클론해 둔 PC에서 이어서 작업할 때
+
+```bash
+git pull
+python3 -m http.server 8000
+```
+
+작업을 마치면 다른 PC에서 이어받을 수 있도록 반드시 푸시합니다.
+
+```bash
+git add -A && git commit -m "작업 내용" && git push
+```
+
+### 4-3. Claude Code 사용 시
+
+저장소에 [.claude/launch.json](.claude/launch.json)이 포함되어 있어, Claude Code에서 별도 설정 없이 `quest-dashboard` 라는 이름으로 개발 서버를 바로 띄울 수 있습니다.
 
 ---
 

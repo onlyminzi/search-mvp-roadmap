@@ -15,6 +15,8 @@ python3 -m http.server 8000   # from repo root
 open http://localhost:8000
 ```
 
+`.claude/launch.json` defines the same server as a `quest-dashboard` preview config, so it can also be started through Claude Code's preview tooling. Setup on a fresh machine is `git clone` + python3 — there is nothing else to install.
+
 Both asset links in [index.html](index.html) are cache-busted (`styles.css?v=4`, `app.js?v=4`). **Bump both `v=` values when you change CSS or JS**, or reloads may serve stale files.
 
 ## Working rule: edit → verify → record
