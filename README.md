@@ -181,7 +181,7 @@ const sprintRoadmap = {
 | SP8 | 기본 흐름 구축 | Rank 1~3 시작 | 미착수 |
 | SP9 | 핵심 기능 확장 | Rank 3~4 | 미착수 |
 | SP10 | 검색 경험 고도화 | Rank 4~5 | 미착수 |
-| SP11 | 확장 화면 개발 | Rank 4~5 | E1/E2: Rank 3, E3: Rank 1, E4: 미착수 |
+| SP11 | 확장 화면 개발 | Rank 4~5 | E1/E2: Rank 3, E3/E4: Rank 1 |
 | SP12 | 오픈 준비 완료 | Rank 5 | 전원 Rank 4 (확장 MVP 개발 완료) |
 | SP13 | 품질검증/심의 | 전원 Rank 6 🏆 | 전원 Rank 6 🏆 |
 | SP14 | QA 수정개발·직원 CBT·점진 오픈 전환 | 전원 Rank 7 🚀 | 전원 Rank 7 🚀 |

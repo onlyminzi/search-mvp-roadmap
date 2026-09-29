@@ -597,7 +597,7 @@ const sprintRoadmap = {
       9: { role: "primary", rank: 3, desc: "🆕 투자정보/이벤트/공지 결과 노출 경로연결 완료" },
       10: { role: "primary", rank: 3, desc: "🆕 진입 구엔진 전환 및 결과없음 챗봇 경로연결 완료" },
       11: { role: "supporting", rank: 1, desc: "🆕 GA 검색 품질 지표 기준 정의 시작" },
-      12: { role: "none", rank: 0, desc: "미착수 - SP12 이후 포함 여부 검토" }
+      12: { role: "supporting", rank: 1, desc: "🆕 확장 콘텐츠 포함 범위 및 결과 노출 정책 논의" }
     },
     storyboard: [
       { type: "narrator", text: "SP11 스프린트 리뷰 시뮬레이션을 시작합니다. [확장 MVP 화면 개발]" },
