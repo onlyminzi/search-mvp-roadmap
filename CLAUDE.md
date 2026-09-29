@@ -17,7 +17,7 @@ open http://localhost:8000
 
 `.claude/launch.json` defines the same server as a `quest-dashboard` preview config, so it can also be started through Claude Code's preview tooling. Setup on a fresh machine is `git clone` + python3 — there is nothing else to install.
 
-Both asset links in [index.html](index.html) are cache-busted (`styles.css?v=9`, `app.js?v=9`). **Bump both `v=` values when you change CSS or JS**, or reloads may serve stale files.
+Both asset links in [index.html](index.html) are cache-busted (`styles.css?v=10`, `app.js?v=10`). **Bump both `v=` values when you change CSS or JS**, or reloads may serve stale files.
 
 ## Working rule: edit → verify → record
 
@@ -31,11 +31,12 @@ Every change to this project follows the same loop, in order:
 
 Two module-level data structures in [app.js](app.js) drive the entire UI; everything else is rendering.
 
-**`quests` — [app.js:2](app.js#L2)** — 12 scenario definitions (`id` 1–12), static across sprints. Holds `badge`, `title`, `zone`, `context`, `goals`, `conditions`, `backlogs`, `rewards {xp, stat, statVal}`, and a `persona` with a `storyboard` array of `{type: "narrator"|"user"|"system", text}` steps. `isExpanded: true` marks the Expanded-MVP quests (ids 9–12).
+**`quests` — [app.js:2](app.js#L2)** — 12 scenario definitions (`id` 1–12), static across sprints. Holds `badge`, `title`, `zone`, `context`, `goals`, `conditions`, `backlogs`, `rewards {xp, stat, statVal}`, and a `persona` with a `storyboard` array of `{type: "narrator"|"user"|"system", text}` steps. `isExpanded: true` marks the Expanded-MVP quests (ids 9–12); `isOps: true` marks the operator-facing ones (ids 7 and 11, both with 박관리 as persona).
 
 **`sprintRoadmap` — [app.js:489](app.js#L489)** — keyed `SP8`…`SP14`. Each sprint carries `period`, `progress`, `concept`, `value`, `review`, its own `storyboard`, and `scenarioStatus` — a map from quest id to `{role, rank, desc}`. This is where per-sprint progress lives.
 
 - `rank` 0–7 maps positionally into the module-level `RANK_TITLES` constant ([app.js](app.js), defined once below the `state` global): 미착수 🔒 / 정책정의 📜 / 일부구현 🛠️ / 경로연결 🔗 / 결과확장 ✨ / 운영가능 🛡️ / QA검증완료 🏆 / 오픈준비완료 🚀. Rank 6 is where SP13's integration QA lands; rank 7 is SP14 fixing what QA found, re-verifying it and rolling it to production. Rank 0 → locked node, `MAX_RANK` → completed (green), else active (cyan). `MAX_RANK` is derived as `RANK_TITLES.length - 1` and is the only thing the render logic and the progress denominator compare against — adding a rung means adding a title plus a matching `.rank-N` rule in [styles.css](styles.css), nothing else.
+- **Rank titles are read through `rankTitle(quest, rank)`, never by indexing `RANK_TITLES` directly.** Rank 6's wording is about customer E2E QA, which does not describe the operator-facing quests, so `isOps` quests read 운영검증완료 🏆 there via the `OPS_RANK_TITLES` override map. Every other rung is shared, and the ladder stays 8 rungs deep, so progress, node colours and path colours are untouched by the override. Quest 8 is deliberately *not* `isOps` despite its internal QA-engineer persona — its deliverable is the customer E2E acceptance test, so 'QA검증완료' is exactly right for it.
 - `role` is `primary` | `supporting` | `validation` | `none`, and is rendered as a CSS class (`.role-badge.<role>`).
 
 **Convention: every sprint's `scenarioStatus` should define all 12 quest ids.** Both `renderQuestBoard()` and `drawConnections()` now skip any quest missing a status (rather than throwing), so a gap degrades gracefully — but a missing id still means that node and its connecting path silently disappear, so keep all 12 defined.
@@ -61,7 +62,7 @@ Two animators replay chat bubbles on timers: `playPersonaSimulation(quest)` in t
 
 ## Conventions and gotchas
 
-- Rank titles live in the single `RANK_TITLES` module constant — both `renderQuestBoard()` and `openQuestModal()` read it. Edit in one place.
+- Rank titles live in the `RANK_TITLES` / `OPS_RANK_TITLES` module constants, reached only through `rankTitle(quest, rank)` — both `renderQuestBoard()` and `openQuestModal()` call it. Edit in one place, and do not reintroduce a direct `RANK_TITLES[rank]` lookup at a call site or the ops track silently reverts to the customer wording.
 - Dynamic markup is built with template strings and `innerHTML`; data text is authored in this repo, not user input. **If this data ever becomes user-supplied, this is an XSS vector — switch to `textContent`/escaping first.**
 - Colors come from CSS variables in `:root` ([styles.css:3](styles.css#L3)): `--color-cyan` (base MVP), `--color-purple` (expanded MVP), `--color-green` (complete), `--color-locked`. Use these rather than literals.
 - The XP bar and progress text are painted only by `updateUI()` from the sprint's ranks — the sprint-tab handler just sets `state.currentSprint` and calls `updateUI()`.

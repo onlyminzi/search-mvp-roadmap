@@ -249,6 +249,7 @@ const quests = [
   },
   {
     id: 7,
+    isOps: true,
     badge: "QUEST 07",
     title: "시나리오 7. 검색 관리자 & 배치 제어",
     zone: "ZONE 4: QUALITY CONTROL & OPS",
@@ -413,6 +414,7 @@ const quests = [
   },
   {
     id: 11,
+    isOps: true,
     badge: "EXP 11",
     isExpanded: true,
     title: "시나리오 11. GA 기반 검색 품질 지표 검증",
@@ -647,7 +649,7 @@ const sprintRoadmap = {
       4: { role: "validation", rank: 6, desc: "메뉴 온보딩 카드 이동 퍼널 QA 완료" },
       5: { role: "validation", rank: 6, desc: "테마 랭킹 및 검색 정합성 최종 QA 통과" },
       6: { role: "validation", rank: 6, desc: "뉴스/공시 E2E 통합 QA 완료" },
-      7: { role: "supporting", rank: 6, desc: "운영/장애 대응 기준 점검 및 변경심의 자료 QA 완료" },
+      7: { role: "supporting", rank: 6, desc: "운영/장애 대응 기준 점검 및 변경심의 자료 정리 완료" },
       8: { role: "primary", rank: 6, desc: "GA/로그 적재 검증 및 MVP E2E 통합 QA 완료" },
       9: { role: "primary", rank: 6, desc: "🆕 투자정보/이벤트/공지 결과 노출 E2E QA 완료" },
       10: { role: "primary", rank: 6, desc: "🆕 진입 구엔진 전환 및 결과없음 챗봇 E2E QA 완료" },
@@ -716,6 +718,18 @@ const RANK_TITLES = [
   "오픈준비완료 🚀"
 ];
 const MAX_RANK = RANK_TITLES.length - 1;
+
+// Quests flagged isOps (7 검색 관리자, 11 GA 지표) are internal/operator-facing,
+// so rank 6's customer-E2E wording does not describe them. Only that rung reads
+// differently; every other rung is shared, and the ladder stays 8 rungs deep so
+// progress, node colours and path colours are unaffected. Scenario 8 stays on
+// the customer wording on purpose — its deliverable *is* the customer E2E QA.
+const OPS_RANK_TITLES = { 6: "운영검증완료 🏆" };
+
+function rankTitle(quest, rank) {
+  if (quest.isOps && OPS_RANK_TITLES[rank]) return OPS_RANK_TITLES[rank];
+  return RANK_TITLES[rank];
+}
 
 // Audio Synth utilizing Web Audio API
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -984,7 +998,7 @@ function renderQuestBoard() {
     `;
 
     // Tooltip information
-    const roleBadgeText = status.role === "none" ? "" : `<span class="rank-badge rank-${rank}">${RANK_TITLES[rank]}</span>`;
+    const roleBadgeText = status.role === "none" ? "" : `<span class="rank-badge rank-${rank}">${rankTitle(q, rank)}</span>`;
     const infoHTML = `
       <div class="quest-node-info ${q.isExpanded ? 'expanded-info' : ''}">
         <div class="info-title">${q.title}</div>
@@ -1252,7 +1266,7 @@ function openQuestModal(id) {
     </div>
     <div class="sprint-status-row">
       <span class="text-xs text-muted">Completeness Level</span>
-      <span class="rank-badge rank-${status.rank}">${RANK_TITLES[status.rank]}</span>
+      <span class="rank-badge rank-${status.rank}">${rankTitle(q, status.rank)}</span>
     </div>
     <div class="sprint-status-row">
       <span class="text-xs text-muted">Squad Role Track</span>
