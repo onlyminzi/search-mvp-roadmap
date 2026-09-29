@@ -434,22 +434,26 @@ body.rpg-theme {
   padding-bottom: 10px;
 }
 
+/* Block rather than flex so the floated badge below can sit on the title's
+   first line while later lines flow underneath it, across the card's full
+   width. As flex the title was a separate column and a long concept name
+   (SP11, SP12, SP14) was clipped with an ellipsis. */
 .sprint-header-top {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: nowrap;
+  display: block;
 }
 
 .sprint-context-header h3 {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: var(--text-white);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* Korean breaks anywhere by default, which split 점진 into 점 / 진.
+     keep-all wraps at spaces instead. */
+  word-break: keep-all;
 }
 
 .badge-sprint {
+  float: left;
+  margin-right: 10px;
+  margin-top: 3px;
   background: rgba(0, 240, 255, 0.1);
   border: 1px solid rgba(0, 240, 255, 0.3);
   color: var(--color-cyan);
@@ -457,12 +461,6 @@ body.rpg-theme {
   border-radius: 4px;
   font-weight: bold;
   font-size: 0.8rem;
-}
-
-.sprint-context-header h3 {
-  font-size: 1.15rem;
-  color: var(--text-white);
-  flex: 1;
 }
 
 /* Split Layout Container: left = scenario map, right = sprint card */

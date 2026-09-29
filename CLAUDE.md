@@ -17,7 +17,7 @@ open http://localhost:8000
 
 `.claude/launch.json` defines the same server as a `quest-dashboard` preview config, so it can also be started through Claude Code's preview tooling. Setup on a fresh machine is `git clone` + python3 — there is nothing else to install.
 
-Both asset links in [index.html](index.html) are cache-busted (`styles.css?v=11`, `app.js?v=11`). **Bump both `v=` values when you change CSS or JS**, or reloads may serve stale files.
+Both asset links in [index.html](index.html) are cache-busted (`styles.css?v=12`, `app.js?v=12`). **Bump both `v=` values when you change CSS or JS**, or reloads may serve stale files.
 
 ## Working rule: edit → verify → record
 
@@ -65,5 +65,6 @@ Two animators replay chat bubbles on timers: `playPersonaSimulation(quest)` in t
 - Rank titles live in the `RANK_TITLES` / `OPS_RANK_TITLES` module constants, reached only through `rankTitle(quest, rank)` — both `renderQuestBoard()` and `openQuestModal()` call it. Edit in one place, and do not reintroduce a direct `RANK_TITLES[rank]` lookup at a call site or the ops track silently reverts to the customer wording.
 - Dynamic markup is built with template strings and `innerHTML`; data text is authored in this repo, not user input. **If this data ever becomes user-supplied, this is an XSS vector — switch to `textContent`/escaping first.**
 - Colors come from CSS variables in `:root` ([styles.css:3](styles.css#L3)): `--color-cyan` (base MVP), `--color-purple` (expanded MVP), `--color-green` (complete), `--color-locked`. Use these rather than literals.
+- **`.sprint-header-top` is `display: block` with a floated `.badge-sprint` on purpose** — a long `concept` (SP11, SP12, SP14 all wrap to two lines) then flows under the badge across the card's full width. As flex the title was a sibling column and got clipped with an ellipsis. The h3 also sets `word-break: keep-all`, without which Korean wraps mid-word (점진 → 점 / 진). Switching that row back to flex reintroduces the truncation.
 - The XP bar and progress text are painted only by `updateUI()` from the sprint's ranks — the sprint-tab handler just sets `state.currentSprint` and calls `updateUI()`.
 - Adding a quest means touching four places: `quests`, every sprint's `scenarioStatus`, the `alignments` array, and the `zoneClass` conditionals in `renderQuestBoard()`.

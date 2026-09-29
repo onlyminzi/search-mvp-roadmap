@@ -229,6 +229,7 @@ const sprintRoadmap = {
 | `.quest-node.expanded-quest` | 확장 MVP 노드 (보라 계열) |
 | `.expanded-section-divider` | 확장 MVP 구분 배너 |
 | `.rank-badge.rank-N` | rank 1~7별 뱃지 |
+| `.sprint-header-top` | 스프린트 카드 헤더. `display:block` + 뱃지 `float:left` 로, 긴 제목의 둘째 줄이 뱃지 아래 공간까지 사용 (flex 로 되돌리면 제목이 `…` 로 잘림) |
 | `.glass` | 글래스모피즘 |
 | `.orbitron` | Orbitron 폰트 |
 
