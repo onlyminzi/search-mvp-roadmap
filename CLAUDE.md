@@ -17,7 +17,7 @@ open http://localhost:8000
 
 `.claude/launch.json` defines the same server as a `quest-dashboard` preview config, so it can also be started through Claude Code's preview tooling. Setup on a fresh machine is `git clone` + python3 — there is nothing else to install.
 
-Both asset links in [index.html](index.html) are cache-busted (`styles.css?v=6`, `app.js?v=6`). **Bump both `v=` values when you change CSS or JS**, or reloads may serve stale files.
+Both asset links in [index.html](index.html) are cache-busted (`styles.css?v=7`, `app.js?v=7`). **Bump both `v=` values when you change CSS or JS**, or reloads may serve stale files.
 
 ## Working rule: edit → verify → record
 
@@ -35,7 +35,7 @@ Two module-level data structures in [app.js](app.js) drive the entire UI; everyt
 
 **`sprintRoadmap` — [app.js:489](app.js#L489)** — keyed `SP8`…`SP14`. Each sprint carries `period`, `concept`, `value`, `review`, its own `storyboard`, and `scenarioStatus` — a map from quest id to `{role, rank, desc}`. This is where per-sprint progress lives.
 
-- `rank` 0–6 maps positionally into the module-level `RANK_TITLES` constant ([app.js](app.js), defined once below the `state` global): 미착수 🔒 / 정책정의 📜 / 일부구현 🛠️ / 경로연결 🔗 / 결과확장 ✨ / 운영가능 🛡️ / QA검증완료 🏆. Rank 0 → locked node, 6 → completed (green), else active (cyan).
+- `rank` 0–7 maps positionally into the module-level `RANK_TITLES` constant ([app.js](app.js), defined once below the `state` global): 미착수 🔒 / 정책정의 📜 / 일부구현 🛠️ / 경로연결 🔗 / 결과확장 ✨ / 운영가능 🛡️ / QA검증완료 🏆 / 오픈준비완료 🚀. Rank 6 is where SP13's integration QA lands; rank 7 is SP14 fixing what QA found, re-verifying it and rolling it to production. Rank 0 → locked node, `MAX_RANK` → completed (green), else active (cyan). `MAX_RANK` is derived as `RANK_TITLES.length - 1` and is the only thing the render logic and the progress denominator compare against — adding a rung means adding a title plus a matching `.rank-N` rule in [styles.css](styles.css), nothing else.
 - `role` is `primary` | `supporting` | `validation` | `none`, and is rendered as a CSS class (`.role-badge.<role>`).
 
 **Convention: every sprint's `scenarioStatus` should define all 12 quest ids.** Both `renderQuestBoard()` and `drawConnections()` now skip any quest missing a status (rather than throwing), so a gap degrades gracefully — but a missing id still means that node and its connecting path silently disappear, so keep all 12 defined.
@@ -46,7 +46,7 @@ Two module-level data structures in [app.js](app.js) drive the entire UI; everyt
 
 - `renderQuestBoard()` rebuilds `#quest-nodes-container` from scratch and attaches click handlers per node. Node position on the winding path comes from the `alignments` array, indexed by **array position, not quest id** — keep it the same length and order as `quests`.
 - `drawConnections()` measures nodes with `getBoundingClientRect()` inside a `setTimeout`, so it must run after the board is in the DOM. It links consecutive entries of `quests` in array order and colors the path by the two ranks. Because it clears `#path-svg` synchronously but appends 100ms later, it holds its pending timeout in the `connectionTimeoutId` module global and clears it on entry — otherwise a redraw inside that window (rapid sprint-tab clicks) lets the previous sprint's paths land after the clear and pile up.
-- Progress % and the XP bar use `totalRankPoints / (quests.length * 6)` — the denominator counts all 12 quests, including Expanded MVP ones that are locked in early sprints.
+- Progress % and the XP bar use `totalRankPoints / (quests.length * MAX_RANK)` — the denominator counts all 12 quests, including Expanded MVP ones that are locked in early sprints.
 
 ### Expanded MVP dual track
 

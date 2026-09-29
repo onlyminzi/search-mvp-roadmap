@@ -132,7 +132,7 @@ const sprintRoadmap = {
     value: "고객 체감 가치",
     review: "리뷰 설명 요약",
     scenarioStatus: {
-      1: { role: "primary"|"supporting"|"validation"|"none", rank: 0~6, desc: "..." },
+      1: { role: "primary"|"supporting"|"validation"|"none", rank: 0~7, desc: "..." },
       // ... 시나리오 1~12 모두 정의
     },
     storyboard: [
@@ -143,7 +143,7 @@ const sprintRoadmap = {
 }
 ```
 
-**Rank 정의 (0~6):**
+**Rank 정의 (0~7):**
 
 | Rank | 뱃지 | 의미 |
 |---|---|---|
@@ -153,7 +153,8 @@ const sprintRoadmap = {
 | 3 | 경로연결 🔗 | 화면 간 흐름 연결 완료 |
 | 4 | 결과확장 ✨ | 기능 확장 및 고도화 |
 | 5 | 운영가능 🛡️ | 운영 가능 수준 도달 |
-| 6 | QA검증완료 🏆 | E2E QA 통과 완료 |
+| 6 | QA검증완료 🏆 | E2E QA 통과 완료 (SP13 종착점) |
+| 7 | 오픈준비완료 🚀 | QA 이슈 수정·재검증 및 운영 반영 완료 (SP14 종착점) |
 
 **Role 정의:**
 
@@ -175,8 +176,8 @@ const sprintRoadmap = {
 | SP10 | 검색 경험 고도화 | Rank 4~5 | 미착수 |
 | SP11 | 확장 화면 개발 | Rank 4~5 | E1/E2: Rank 3, E3: Rank 1, E4: 미착수 |
 | SP12 | 오픈 준비 완료 | Rank 5 | E1/E2: Rank 4, E3/E4: Rank 2 |
-| SP13 | 품질검증/심의 | Rank 5~6 | E1/E2: Rank 5, E3: Rank 4, E4: Rank 3 |
-| SP14 | QA 수정개발·직원 CBT·점진 오픈 전환 | 전원 Rank 6 🏆 | 전원 Rank 6 🏆 |
+| SP13 | 품질검증/심의 | 전원 Rank 6 🏆 | 전원 Rank 6 🏆 |
+| SP14 | QA 수정개발·직원 CBT·점진 오픈 전환 | 전원 Rank 7 🚀 | 전원 Rank 7 🚀 |
 
 ---
 
@@ -220,7 +221,7 @@ const sprintRoadmap = {
 | `.quest-node.locked` | 미착수 (반투명) |
 | `.quest-node.expanded-quest` | 확장 MVP 노드 (보라 계열) |
 | `.expanded-section-divider` | 확장 MVP 구분 배너 |
-| `.rank-badge.rank-N` | rank 1~6별 뱃지 |
+| `.rank-badge.rank-N` | rank 1~7별 뱃지 |
 | `.glass` | 글래스모피즘 |
 | `.orbitron` | Orbitron 폰트 |
 
@@ -232,12 +233,12 @@ SP11부터 기본 MVP(Q1~Q8)와 확장 MVP(E1~E4)가 별도 트랙으로 시각�
 
 ```
 [기본 MVP Q1~Q8]  ← 시안(#00f0ff) 색상, SP8~SP14
-        ↕ Rank 0 → 6으로 레벨업
+        ↕ Rank 0 → 7로 레벨업
 
 ── 🆕 EXPANDED MVP ZONE 구분 배너 ──
 
 [확장 MVP E1~E4]  ← 보라(#bd00ff) 색상, SP11~SP14
-        ↕ Rank 0 → 6으로 레벨업
+        ↕ Rank 0 → 7로 레벨업
 ```
 
 - 노드 라벨: 기본 `Q1~Q8`, 확장 `E1~E4` (내부 id는 9~12)

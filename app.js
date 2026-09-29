@@ -635,18 +635,18 @@ const sprintRoadmap = {
     value: "10월 오픈 전 고객에게 노출될 핵심 흐름의 QA와 품질검증을 진행하고, 변경심의 및 운영 이행에 필요한 기준을 정리한다.",
     review: "진입/결과화면 주요 검색 흐름 QA와 통합 검색 결과 품질검증을 마쳤으며, 변경심의에 필요한 장애 대응 기준 등 모든 자료를 정리했습니다.",
     scenarioStatus: {
-      1: { role: "validation", rank: 5, desc: "진입화면 QA 및 주요 검색 흐름 점검 완료" },
-      2: { role: "validation", rank: 5, desc: "자동완성 API QA 및 응답시간 기준 통과" },
+      1: { role: "validation", rank: 6, desc: "진입화면 QA 및 주요 검색 흐름 점검 완료" },
+      2: { role: "validation", rank: 6, desc: "자동완성 API QA 및 응답시간 기준 통과" },
       3: { role: "validation", rank: 6, desc: "종목 검색 쿼리셋 정확도 검증 최종 완료" },
       4: { role: "validation", rank: 6, desc: "메뉴 온보딩 카드 이동 퍼널 QA 완료" },
-      5: { role: "validation", rank: 5, desc: "테마 랭킹 및 검색 정합성 중간 QA 통과" },
+      5: { role: "validation", rank: 6, desc: "테마 랭킹 및 검색 정합성 최종 QA 통과" },
       6: { role: "validation", rank: 6, desc: "뉴스/공시 E2E 통합 QA 완료" },
-      7: { role: "supporting", rank: 5, desc: "운영/장애 대응 기준 점검 및 변경심의 필요 자료 정리" },
-      8: { role: "primary", rank: 5, desc: "GA/로그 정상 적재 확인 및 품질 지표 2차 확인" },
-      9: { role: "primary", rank: 5, desc: "🆕 투자정보/이벤트/공지 결과 노출 운영가능 상태 도달" },
-      10: { role: "primary", rank: 5, desc: "🆕 진입 구엔진 전환 및 결과없음 챗봇 운영가능 상태 도달" },
-      11: { role: "supporting", rank: 4, desc: "🆕 GA 기반 검색 품질 지표 1차 집계 완료" },
-      12: { role: "supporting", rank: 4, desc: "🆕 금상/커뮤니티 결과화면 결과확장 완료" }
+      7: { role: "supporting", rank: 6, desc: "운영/장애 대응 기준 점검 및 변경심의 자료 QA 완료" },
+      8: { role: "primary", rank: 6, desc: "GA/로그 적재 검증 및 MVP E2E 통합 QA 완료" },
+      9: { role: "primary", rank: 6, desc: "🆕 투자정보/이벤트/공지 결과 노출 E2E QA 완료" },
+      10: { role: "primary", rank: 6, desc: "🆕 진입 구엔진 전환 및 결과없음 챗봇 E2E QA 완료" },
+      11: { role: "supporting", rank: 6, desc: "🆕 GA 기반 검색 품질 지표 집계 검증 완료" },
+      12: { role: "supporting", rank: 6, desc: "🆕 금상/커뮤니티 결과화면 QA 완료" }
     },
     storyboard: [
       { type: "narrator", text: "SP13 스프린트 리뷰 시뮬레이션을 시작합니다. [품질검증 및 변경심의]" },
@@ -663,18 +663,18 @@ const sprintRoadmap = {
     value: "SP13 통합 QA에서 발견된 오픈 차단 이슈를 수정·재검증하고, 10/7 운영 반영과 10/8 집중 모니터링을 거쳐 직원 자연 사용 CBT와 고객 점진 오픈이 가능한 상태를 만든다.",
     review: "오픈 차단 이슈 수정·재검증과 10/7 운영 반영을 마치고, 10/12~10/14 직원 CBT 운영안과 SP15 1%→20% 점진 오픈 체크리스트를 확정했습니다. 기능별 A/B 개선 실험은 100% 전환 이후인 SP17로 분리했습니다.",
     scenarioStatus: {
-      1: { role: "validation", rank: 6, desc: "진입 Must 흐름 회귀 테스트 통과 및 10/7 운영 반영 완료" },
-      2: { role: "validation", rank: 6, desc: "자동완성 기반 검색성공률 산식 검증 및 목적지 도달 계측 확인" },
-      3: { role: "validation", rank: 6, desc: "Must 쿼리셋 오분류·잘못된 랜딩 해소 및 종목 데이터 일치 재검증" },
-      4: { role: "validation", rank: 6, desc: "메뉴 딥링크 랜딩 재검증 및 환경별 스모크 테스트 통과" },
-      5: { role: "validation", rank: 6, desc: "테마 결과 품질 보완 및 자연 사용 미검증 구간 식별 체계 확정" },
-      6: { role: "validation", rank: 6, desc: "뉴스/공시 배치 안정화 및 10/8 집중 모니터링 이상 없음" },
-      7: { role: "primary", rank: 6, desc: "벡터검색 on/off·구엔진 복귀·롤백 절차 리허설 완료" },
-      8: { role: "primary", rank: 6, desc: "오픈 차단 이슈 수정·재검증 완료 및 직원 CBT 운영안 확정" },
-      9: { role: "validation", rank: 6, desc: "🆕 투자정보/이벤트/공지 E2E 회귀 테스트 통과 및 운영 반영 완료" },
-      10: { role: "validation", rank: 6, desc: "🆕 신→구 전환·결과없음 회복을 SP15 초기 집중 검증 항목으로 확정" },
-      11: { role: "primary", rank: 6, desc: "🆕 공통 Primary·Guardrail 산식 검증 및 GA/서버 로그 누락·중복 QA 완료" },
-      12: { role: "primary", rank: 6, desc: "🆕 금융상품 배너 노출·클릭 및 금융상품 홈 도달 검증 완료" }
+      1: { role: "validation", rank: 7, desc: "진입 Must 흐름 회귀 테스트 통과 및 10/7 운영 반영 완료" },
+      2: { role: "validation", rank: 7, desc: "자동완성 기반 검색성공률 산식 검증 및 목적지 도달 계측 확인" },
+      3: { role: "validation", rank: 7, desc: "Must 쿼리셋 오분류·잘못된 랜딩 해소 및 종목 데이터 일치 재검증" },
+      4: { role: "validation", rank: 7, desc: "메뉴 딥링크 랜딩 재검증 및 환경별 스모크 테스트 통과" },
+      5: { role: "validation", rank: 7, desc: "테마 결과 품질 보완 및 자연 사용 미검증 구간 식별 체계 확정" },
+      6: { role: "validation", rank: 7, desc: "뉴스/공시 배치 안정화 및 10/8 집중 모니터링 이상 없음" },
+      7: { role: "primary", rank: 7, desc: "벡터검색 on/off·구엔진 복귀·롤백 절차 리허설 완료" },
+      8: { role: "primary", rank: 7, desc: "오픈 차단 이슈 수정·재검증 완료 및 직원 CBT 운영안 확정" },
+      9: { role: "validation", rank: 7, desc: "🆕 투자정보/이벤트/공지 E2E 회귀 테스트 통과 및 운영 반영 완료" },
+      10: { role: "validation", rank: 7, desc: "🆕 신→구 전환·결과없음 회복을 SP15 초기 집중 검증 항목으로 확정" },
+      11: { role: "primary", rank: 7, desc: "🆕 공통 Primary·Guardrail 산식 검증 및 GA/서버 로그 누락·중복 QA 완료" },
+      12: { role: "primary", rank: 7, desc: "🆕 금융상품 배너 노출·클릭 및 금융상품 홈 도달 검증 완료" }
     },
     storyboard: [
       { type: "narrator", text: "SP14 스프린트 리뷰 시뮬레이션을 시작합니다. [QA 수정개발 · 직원 CBT 준비]" },
@@ -693,8 +693,11 @@ let state = {
   selectedQuestId: null
 };
 
-// Rank 0-6 titles, indexed positionally by scenarioStatus.rank.
+// Rank titles, indexed positionally by scenarioStatus.rank.
 // Used by both renderQuestBoard() and openQuestModal() — keep as a single source.
+// Rank 6 is where SP13's integration QA lands; rank 7 is SP14's fix/re-verify
+// and production rollout on top of it. Derive MAX_RANK rather than hardcoding,
+// so adding a rung only means adding a title here (and a .rank-N CSS rule).
 const RANK_TITLES = [
   "미착수 🔒",
   "정책정의 📜",
@@ -702,8 +705,10 @@ const RANK_TITLES = [
   "경로연결 🔗",
   "결과확장 ✨",
   "운영가능 🛡️",
-  "QA검증완료 🏆"
+  "QA검증완료 🏆",
+  "오픈준비완료 🚀"
 ];
+const MAX_RANK = RANK_TITLES.length - 1;
 
 // Audio Synth utilizing Web Audio API
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -835,7 +840,7 @@ function updateUI() {
 
   // Update Profile & Stats
   let totalRankPoints = 0;
-  let maxPossiblePoints = quests.length * 6; // 12 quests * Rank 6 max
+  let maxPossiblePoints = quests.length * MAX_RANK; // all 12 quests at the top rank
   
   Object.keys(data.scenarioStatus).forEach(id => {
     totalRankPoints += data.scenarioStatus[id].rank;
@@ -932,9 +937,9 @@ function renderQuestBoard() {
     if (rank === 0) {
       nodeClass += " locked";
       statusText = "🔒 미착수";
-    } else if (rank === 6) {
+    } else if (rank === MAX_RANK) {
       nodeClass += " completed";
-      statusText = `🏆 QA완료 (Lvl ${rank})`;
+      statusText = `🚀 오픈준비완료 (Lvl ${rank})`;
     } else {
       nodeClass += " active";
       statusText = `⚔️ 개발중 (Lvl ${rank})`;
@@ -1046,7 +1051,7 @@ function drawConnections() {
       const currentRank = currentStatus.rank;
       const nextRank = nextStatus.rank;
 
-      if (currentRank === 6 && nextRank > 0) {
+      if (currentRank === MAX_RANK && nextRank > 0) {
         path.setAttribute("stroke", "var(--color-green)");
         path.setAttribute("stroke-width", "4");
         path.setAttribute("style", "filter: drop-shadow(0 0 4px var(--color-green))");

@@ -795,6 +795,13 @@ body.rpg-theme {
 .rank-4 { background: rgba(255, 215, 0, 0.2); color: #ffd700; border: 1px solid #ffd700; }
 .rank-5 { background: rgba(0, 229, 255, 0.2); color: #00e5ff; border: 1px solid #00e5ff; }
 .rank-6 { background: rgba(0, 255, 170, 0.2); color: #00ffaa; border: 1px solid #00ffaa; }
+/* Top rung: filled rather than outlined, so it reads a step above rank-6 green */
+.rank-7 {
+  background: var(--color-green);
+  color: var(--bg-primary);
+  border: 1px solid var(--color-green);
+  box-shadow: 0 0 6px rgba(0, 255, 170, 0.6);
+}
 
 /* Sprint status details box inside modal */
 .sprint-status-box {
