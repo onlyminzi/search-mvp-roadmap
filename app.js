@@ -659,30 +659,30 @@ const sprintRoadmap = {
   },
   SP14: {
     period: "2026.09.28 ~ 2026.10.08",
-    concept: "수정개발 및 유저테스트 실험 설계",
-    value: "QA/품질검증 결과를 반영해 수정개발을 진행하고, 연말까지 이어질 유저테스트 전체 시나리오와 첫 번째 실험 설계를 구체화한다.",
-    review: "QA 기반 수정개발을 완벽하게 마치고 유저테스트 대상 검색결과 및 관찰 지표 설계를 마무리하여, 마침내 확장 MVP 런칭을 완료했습니다.",
+    concept: "QA 수정개발 · 직원 CBT · 점진 오픈 전환",
+    value: "SP13 통합 QA에서 발견된 오픈 차단 이슈를 수정·재검증하고, 10/7 운영 반영과 10/8 집중 모니터링을 거쳐 직원 자연 사용 CBT와 고객 점진 오픈이 가능한 상태를 만든다.",
+    review: "오픈 차단 이슈 수정·재검증과 10/7 운영 반영을 마치고, 10/12~10/14 직원 CBT 운영안과 SP15 1%→20% 점진 오픈 체크리스트를 확정했습니다. 기능별 A/B 개선 실험은 100% 전환 이후인 SP17로 분리했습니다.",
     scenarioStatus: {
-      1: { role: "validation", rank: 6, desc: "QA 결과 기반 진입 흐름 수정개발 완벽 적용" },
-      2: { role: "validation", rank: 6, desc: "자동완성 실서버 부하 테스트 및 응답 검증 완료" },
-      3: { role: "validation", rank: 6, desc: "종목/공모주 검색 품질 최종 검증 완료" },
-      4: { role: "validation", rank: 6, desc: "메뉴 꾸러미 UX/UI 최종 QA 완료" },
-      5: { role: "validation", rank: 6, desc: "테마 검색 정합성 최종 검증 완료" },
-      6: { role: "validation", rank: 6, desc: "뉴스/공시 배치 안정화 및 E2E 최종 통과" },
-      7: { role: "primary", rank: 6, desc: "관리자 대시보드 실시간 로그 관제 완벽 가동" },
-      8: { role: "primary", rank: 6, desc: "유저테스트 관찰 지표 확정 및 실험 설계 완료" },
-      9: { role: "validation", rank: 6, desc: "🆕 투자정보/이벤트/공지 최종 E2E QA 완료" },
-      10: { role: "validation", rank: 6, desc: "🆕 진입화면 개선 최종 검증 및 결과없음 케이스 완벽 처리" },
-      11: { role: "primary", rank: 6, desc: "🆕 GA 검색 품질 지표 체계 완성 및 대시보드 완전 가동" },
-      12: { role: "primary", rank: 6, desc: "🆕 금상/커뮤니티 결과화면 최종 QA 완료 및 런칭" }
+      1: { role: "validation", rank: 6, desc: "진입 Must 흐름 회귀 테스트 통과 및 10/7 운영 반영 완료" },
+      2: { role: "validation", rank: 6, desc: "자동완성 기반 검색성공률 산식 검증 및 목적지 도달 계측 확인" },
+      3: { role: "validation", rank: 6, desc: "Must 쿼리셋 오분류·잘못된 랜딩 해소 및 종목 데이터 일치 재검증" },
+      4: { role: "validation", rank: 6, desc: "메뉴 딥링크 랜딩 재검증 및 환경별 스모크 테스트 통과" },
+      5: { role: "validation", rank: 6, desc: "테마 결과 품질 보완 및 자연 사용 미검증 구간 식별 체계 확정" },
+      6: { role: "validation", rank: 6, desc: "뉴스/공시 배치 안정화 및 10/8 집중 모니터링 이상 없음" },
+      7: { role: "primary", rank: 6, desc: "벡터검색 on/off·구엔진 복귀·롤백 절차 리허설 완료" },
+      8: { role: "primary", rank: 6, desc: "오픈 차단 이슈 수정·재검증 완료 및 직원 CBT 운영안 확정" },
+      9: { role: "validation", rank: 6, desc: "🆕 투자정보/이벤트/공지 E2E 회귀 테스트 통과 및 운영 반영 완료" },
+      10: { role: "validation", rank: 6, desc: "🆕 신→구 전환·결과없음 회복을 SP15 초기 집중 검증 항목으로 확정" },
+      11: { role: "primary", rank: 6, desc: "🆕 공통 Primary·Guardrail 산식 검증 및 GA/서버 로그 누락·중복 QA 완료" },
+      12: { role: "primary", rank: 6, desc: "🆕 금융상품 배너 노출·클릭 및 금융상품 홈 도달 검증 완료" }
     },
     storyboard: [
-      { type: "narrator", text: "SP14 스프린트 리뷰 시뮬레이션을 시작합니다. [수정개발 및 유저테스트]" },
-      { type: "user", text: "💻 개발자: QA 도중 발견된 자잘한 이슈들에 대한 수정개발을 모두 반영하여 실서버에 배포했습니다." },
-      { type: "system", text: "🛠️ S1 (수정개발 반영). 실서버 반영 후 검색 흐름이 완벽하게 동작합니다." },
-      { type: "user", text: "✍️ 기획자: 유저테스트(UT)를 위한 전체 시나리오 정리와 첫 실험 관찰 지표 설계도 마무리했습니다." },
-      { type: "system", text: "🏆 S4 (100% 런칭). 🚀 폭죽이 터지며 확장 MVP 신규 검색엔진의 시대가 열렸습니다!" },
-      { type: "narrator", text: "SP14 리뷰 결과: 대성공! 완벽한 품질 확보 및 향후 유저테스트 플랜 가동." }
+      { type: "narrator", text: "SP14 스프린트 리뷰 시뮬레이션을 시작합니다. [QA 수정개발 · 직원 CBT 준비]" },
+      { type: "user", text: "💻 개발자: SP13에서 발견된 오픈 차단 이슈를 모두 수정·재검증하고 10/7 운영 환경에 반영했습니다." },
+      { type: "system", text: "🛠️ 10/8 집중 모니터링 결과 오류율·타임아웃·p95 응답시간·롤백 경로 모두 정상입니다." },
+      { type: "user", text: "✍️ 기획자: 10/12~10/14 직원 CBT는 별도 과업 없이 고객과 동일한 환경에서 자연스럽게 검색하도록 운영합니다." },
+      { type: "system", text: "📊 공통 Primary·Guardrail 산식과 여정 로그 검증 완료. 자연 사용에서 발생하지 않은 기능은 '정상'이 아닌 '미검증'으로 표시됩니다." },
+      { type: "narrator", text: "SP14 리뷰 결과: 고객 오픈 게이트 통과! SP15에서 1% → 5% → 10% → 20% 점진 오픈을 시작합니다." }
     ]
   }
 };

@@ -176,7 +176,7 @@ const sprintRoadmap = {
 | SP11 | 확장 화면 개발 | Rank 4~5 | E1/E2: Rank 3, E3: Rank 1, E4: 미착수 |
 | SP12 | 오픈 준비 완료 | Rank 5 | E1/E2: Rank 4, E3/E4: Rank 2 |
 | SP13 | 품질검증/심의 | Rank 5~6 | E1/E2: Rank 5, E3: Rank 4, E4: Rank 3 |
-| SP14 | 실험 설계/UT | 전원 Rank 6 🏆 | 전원 Rank 6 🏆 |
+| SP14 | QA 수정개발·직원 CBT·점진 오픈 전환 | 전원 Rank 6 🏆 | 전원 Rank 6 🏆 |
 
 ---
 
