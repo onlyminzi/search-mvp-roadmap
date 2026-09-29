@@ -17,7 +17,7 @@ open http://localhost:8000
 
 `.claude/launch.json` defines the same server as a `quest-dashboard` preview config, so it can also be started through Claude Code's preview tooling. Setup on a fresh machine is `git clone` + python3 — there is nothing else to install.
 
-Both asset links in [index.html](index.html) are cache-busted (`styles.css?v=8`, `app.js?v=8`). **Bump both `v=` values when you change CSS or JS**, or reloads may serve stale files.
+Both asset links in [index.html](index.html) are cache-busted (`styles.css?v=9`, `app.js?v=9`). **Bump both `v=` values when you change CSS or JS**, or reloads may serve stale files.
 
 ## Working rule: edit → verify → record
 
@@ -33,7 +33,7 @@ Two module-level data structures in [app.js](app.js) drive the entire UI; everyt
 
 **`quests` — [app.js:2](app.js#L2)** — 12 scenario definitions (`id` 1–12), static across sprints. Holds `badge`, `title`, `zone`, `context`, `goals`, `conditions`, `backlogs`, `rewards {xp, stat, statVal}`, and a `persona` with a `storyboard` array of `{type: "narrator"|"user"|"system", text}` steps. `isExpanded: true` marks the Expanded-MVP quests (ids 9–12).
 
-**`sprintRoadmap` — [app.js:489](app.js#L489)** — keyed `SP8`…`SP14`. Each sprint carries `period`, `concept`, `value`, `review`, its own `storyboard`, and `scenarioStatus` — a map from quest id to `{role, rank, desc}`. This is where per-sprint progress lives.
+**`sprintRoadmap` — [app.js:489](app.js#L489)** — keyed `SP8`…`SP14`. Each sprint carries `period`, `progress`, `concept`, `value`, `review`, its own `storyboard`, and `scenarioStatus` — a map from quest id to `{role, rank, desc}`. This is where per-sprint progress lives.
 
 - `rank` 0–7 maps positionally into the module-level `RANK_TITLES` constant ([app.js](app.js), defined once below the `state` global): 미착수 🔒 / 정책정의 📜 / 일부구현 🛠️ / 경로연결 🔗 / 결과확장 ✨ / 운영가능 🛡️ / QA검증완료 🏆 / 오픈준비완료 🚀. Rank 6 is where SP13's integration QA lands; rank 7 is SP14 fixing what QA found, re-verifying it and rolling it to production. Rank 0 → locked node, `MAX_RANK` → completed (green), else active (cyan). `MAX_RANK` is derived as `RANK_TITLES.length - 1` and is the only thing the render logic and the progress denominator compare against — adding a rung means adding a title plus a matching `.rank-N` rule in [styles.css](styles.css), nothing else.
 - `role` is `primary` | `supporting` | `validation` | `none`, and is rendered as a CSS class (`.role-badge.<role>`).
@@ -46,7 +46,8 @@ Two module-level data structures in [app.js](app.js) drive the entire UI; everyt
 
 - `renderQuestBoard()` rebuilds `#quest-nodes-container` from scratch and attaches click handlers per node. Node position on the winding path comes from the `alignments` array, indexed by **array position, not quest id** — keep it the same length and order as `quests`.
 - `drawConnections()` measures nodes with `getBoundingClientRect()` inside a `setTimeout`, so it must run after the board is in the DOM. It links consecutive entries of `quests` in array order and colors the path by the two ranks. Because it clears `#path-svg` synchronously but appends 100ms later, it holds its pending timeout in the `connectionTimeoutId` module global and clears it on entry — otherwise a redraw inside that window (rapid sprint-tab clicks) lets the previous sprint's paths land after the clear and pile up.
-- Progress % and the XP bar use `totalRankPoints / (quests.length * MAX_RANK)` — the denominator counts all 12 quests, including Expanded MVP ones that are locked in early sprints.
+- The headline % (SQUAD PROGRESS) and the XP bar (SQUAD VELOCITY) both read the sprint's own `progress` field — 30 / 50 / 60 / 65 / 75 / 85 / 100 across SP8–SP14. **These are the figures reported internally, scoped by development effort, and they intentionally do not track the rank sum**: SP9 was reported at 50% while only 18 of its 84 rank points are earned, because five scenarios have not started there. Changing a rank does not move the headline — edit `progress` as well.
+- A sprint with no `progress` falls back to `totalRankPoints / (quests.length * MAX_RANK)`, whose denominator counts all 12 quests including Expanded MVP ones locked in early sprints. Every sprint currently sets `progress`, so the fallback only matters for a newly added one.
 
 ### Expanded MVP dual track
 

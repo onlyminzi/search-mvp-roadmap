@@ -489,6 +489,7 @@ const quests = [
 const sprintRoadmap = {
   SP8: {
     period: "2026.07.06 ~ 2026.07.17",
+    progress: 30,
     concept: "기본 검색 흐름 구축",
     value: "고객이 검색창에 진입해 자동완성 후보를 발견하고, 일부 종목/메뉴 결과까지 연결되는 기본 흐름을 이용할 수 있다.",
     review: "고객이 검색창 진입(S1), 자동완성 후보 조회(S2), 대표 종목 현재가(S3) 및 이체 등 메뉴결과 1차 연결(S4)을 완료하여 엔드투엔드 기본 기틀을 세웠습니다.",
@@ -518,6 +519,7 @@ const sprintRoadmap = {
   },
   SP9: {
     period: "2026.07.20 ~ 2026.07.31",
+    progress: 50,
     concept: "핵심 검색 기능 확장",
     value: "인기검색을 통해 탐색을 시작하고, 자동완성/종목/테마 결과까지 한층 확장된 검색 범위와 카테고리를 활용할 수 있다.",
     review: "인기검색어 순위 연동(S1), 테마 자동완성(S2), 전체 종목 인덱스 확장(S3), 테마-종목 매핑(S5)이 신규로 뚫려 고객 탐색폭을 비약적으로 넓혔습니다.",
@@ -547,6 +549,7 @@ const sprintRoadmap = {
   },
   SP10: {
     period: "2026.08.03 ~ 2026.08.14",
+    progress: 60,
     concept: "검색 경험 고도화",
     value: "검색 결과에서 최신 뉴스/공시를 조회하고, 메뉴 꾸러미, 공모주 정보 추가로 끊김 없는 검색을 경험한다.",
     review: "공모주(S3), 뉴스/공시(S6) 탭 연동을 더하고, 사전 관리(S7)와 고객 UT 검토 초안(S8)을 준비하며 고품질 검색을 구축했습니다.",
@@ -576,6 +579,7 @@ const sprintRoadmap = {
   },
   SP11: {
     period: "2026.08.18 ~ 2026.08.28",
+    progress: 65,
     concept: "확장 MVP 개발 범위 재정의 및 오픈 기반 화면 개발",
     value: "10월 단계적 오픈을 준비하기 위해 확장 MVP 범위를 확정하고, 고객이 실제로 접하는 진입-결과-결과없음 흐름과 GA 검증 기반을 만든다.",
     review: "투자정보, 이벤트, 공지, GA, 진입화면, 결과없음 케이스에 대한 확장 범위를 확정하고 화면 개발을 진행했습니다.",
@@ -604,6 +608,7 @@ const sprintRoadmap = {
   },
   SP12: {
     period: "2026.08.31 ~ 2026.09.11",
+    progress: 75,
     concept: "확장 MVP 개발 완료 및 오픈 준비 전환",
     value: "확장 MVP 개발 범위를 마무리하고, 10월 물리서버 기반 단계적 오픈 전 필요한 품질/로그/고객 접점 보완 항목을 정리한다.",
     review: "SP11 확정 범위 개발을 마무리하고 SP12 확장 콘텐츠(금상/커뮤니티) 포함 범위를 판단했으며, 10월 오픈 준비 항목 분리를 완료했습니다.",
@@ -631,6 +636,7 @@ const sprintRoadmap = {
   },
   SP13: {
     period: "2026.09.14 ~ 2026.09.23",
+    progress: 85,
     concept: "QA · 변경심의 · 품질검증",
     value: "10월 오픈 전 고객에게 노출될 핵심 흐름의 QA와 품질검증을 진행하고, 변경심의 및 운영 이행에 필요한 기준을 정리한다.",
     review: "진입/결과화면 주요 검색 흐름 QA와 통합 검색 결과 품질검증을 마쳤으며, 변경심의에 필요한 장애 대응 기준 등 모든 자료를 정리했습니다.",
@@ -659,6 +665,7 @@ const sprintRoadmap = {
   },
   SP14: {
     period: "2026.09.28 ~ 2026.10.08",
+    progress: 100,
     concept: "QA 수정개발 · 직원 CBT · 점진 오픈 전환",
     value: "SP13 통합 QA에서 발견된 오픈 차단 이슈를 수정·재검증하고, 10/7 운영 반영과 10/8 집중 모니터링을 거쳐 직원 자연 사용 CBT와 고객 점진 오픈이 가능한 상태를 만든다.",
     review: "오픈 차단 이슈 수정·재검증과 10/7 운영 반영을 마치고, 10/12~10/14 직원 CBT 운영안과 SP15 1%→20% 점진 오픈 체크리스트를 확정했습니다. 기능별 A/B 개선 실험은 100% 전환 이후인 SP17로 분리했습니다.",
@@ -838,15 +845,25 @@ function updateUI() {
   document.getElementById("display-sprint-value").innerText = data.value;
   document.getElementById("display-sprint-review").innerText = data.review;
 
-  // Update Profile & Stats
-  let totalRankPoints = 0;
-  let maxPossiblePoints = quests.length * MAX_RANK; // all 12 quests at the top rank
-  
-  Object.keys(data.scenarioStatus).forEach(id => {
-    totalRankPoints += data.scenarioStatus[id].rank;
-  });
+  // Update Profile & Stats.
+  // The headline figure is the sprint's own `progress` — the number reported
+  // internally, scoped by development effort. It deliberately does not track
+  // the rank sum: SP9 was reported at 50% while only 18 of 84 rank points are
+  // earned there, because five scenarios have not started yet. Sprints with no
+  // reported figure fall back to the rank-derived value.
+  let completionRate = data.progress;
 
-  const completionRate = Math.round((totalRankPoints / maxPossiblePoints) * 100);
+  if (typeof completionRate !== "number") {
+    let totalRankPoints = 0;
+    const maxPossiblePoints = quests.length * MAX_RANK; // all 12 quests at the top rank
+
+    Object.keys(data.scenarioStatus).forEach(id => {
+      totalRankPoints += data.scenarioStatus[id].rank;
+    });
+
+    completionRate = Math.round((totalRankPoints / maxPossiblePoints) * 100);
+  }
+
   document.getElementById("completion-rate").innerText = `${completionRate}% SQUAD PROGRESS`;
 
   // Dynamic Level calculation based on sprint index
@@ -854,8 +871,7 @@ function updateUI() {
   document.getElementById("char-level").innerText = `LV.${sprintLevels[sprintId]}`;
   document.getElementById("xp-text").innerText = `${completionRate}%`;
   
-  const xpPct = (totalRankPoints / maxPossiblePoints) * 100;
-  document.getElementById("xp-progress").style.width = `${xpPct}%`;
+  document.getElementById("xp-progress").style.width = `${completionRate}%`;
 
   // Squad Capability stats are now static, removed dynamic updates
   // Render Quest Nodes and Draw Connection Lines
