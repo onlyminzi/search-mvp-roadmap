@@ -720,11 +720,20 @@ const RANK_TITLES = [
 const MAX_RANK = RANK_TITLES.length - 1;
 
 // Quests flagged isOps (7 검색 관리자, 11 GA 지표) are internal/operator-facing,
-// so rank 6's customer-E2E wording does not describe them. Only that rung reads
-// differently; every other rung is shared, and the ladder stays 8 rungs deep so
-// progress, node colours and path colours are unaffected. Scenario 8 stays on
-// the customer wording on purpose — its deliverable *is* the customer E2E QA.
-const OPS_RANK_TITLES = { 6: "운영검증완료 🏆" };
+// so the rungs phrased around the customer's search-result journey do not
+// describe them: rank 3 is a batch/ingest pipeline being wired up rather than
+// screens being linked, rank 4 is management capability being added rather than
+// results being widened, and rank 6 is an operations check rather than customer
+// E2E QA. Ranks 0-2, 5 and 7 read the same on both tracks, and the ladder stays
+// 8 rungs deep, so progress, node colours and path colours are unaffected.
+// Scenario 8 stays on the customer wording on purpose — its deliverable *is*
+// the customer E2E QA. Keep the emoji identical to RANK_TITLES at the same
+// index so the two tracks still read as one ladder.
+const OPS_RANK_TITLES = {
+  3: "운영연동 🔗",
+  4: "기능확장 ✨",
+  6: "운영검증완료 🏆"
+};
 
 function rankTitle(quest, rank) {
   if (quest.isOps && OPS_RANK_TITLES[rank]) return OPS_RANK_TITLES[rank];
