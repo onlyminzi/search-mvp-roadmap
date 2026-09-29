@@ -625,8 +625,8 @@ const sprintRoadmap = {
       8: { role: "validation", rank: 4, desc: "내부 QA 진행 및 GA 적재 확인" },
       9: { role: "primary", rank: 4, desc: "🆕 투자정보/이벤트/공지 결과 노출 결과확장 완료" },
       10: { role: "primary", rank: 4, desc: "🆕 진입 구엔진 전환 및 결과없음 챗봇 결과확장 완료" },
-      11: { role: "supporting", rank: 2, desc: "🆕 GA 로그 기준 정리 완료 및 대시보드 검증 준비" },
-      12: { role: "supporting", rank: 2, desc: "🆕 확장 콘텐츠 범위 확정 — 금융상품 포함, 커뮤니티 제외" }
+      11: { role: "supporting", rank: 4, desc: "🆕 GA 이벤트 적재 구현 완료 및 검색 품질 지표 대시보드 구축" },
+      12: { role: "supporting", rank: 4, desc: "🆕 금융상품 결과 카드/배너 개발 완료 (커뮤니티는 범위 제외 확정)" }
     },
     storyboard: [
       { type: "narrator", text: "SP12 스프린트 리뷰 시뮬레이션을 시작합니다. [확장 MVP 완료 및 오픈 준비]" },
