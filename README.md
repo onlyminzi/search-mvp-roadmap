@@ -118,7 +118,7 @@ const quests = [
 | 9 | EXP 09 | 투자정보/이벤트/공지 탐색 | **Expanded MVP** |
 | 10 | EXP 10 | 진입 구엔진 전환 & 결과없음 챗봇 | **Expanded MVP** |
 | 11 | EXP 11 | GA 기반 검색 품질 지표 검증 | **Expanded MVP** |
-| 12 | EXP 12 | 금상/커뮤니티 콘텐츠 탐색 | **Expanded MVP** |
+| 12 | EXP 12 | 금융상품 콘텐츠 탐색 | **Expanded MVP** |
 
 ---
 
